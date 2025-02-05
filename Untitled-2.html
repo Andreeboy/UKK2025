@@ -1,0 +1,91 @@
+<html> //Sebagai elemen utama yang membungkus seluruh struktur dokumen HTML
+<head> //metadata tentang dokumen, termasuk judul halaman, tautan ke stylesheet, dan elemen style atau script untuk menambahkan gaya dan logika
+    <title>Aplikasi Kalkulator Sederhana</title> // Menentukan judul dokumen yang muncul pada tab browser (contoh: "Aplikasi Kalkulator Sederhana
+    <style> //Berisi aturan CSS untuk menentukan tampilan elemen dalam halaman
+        body{ //Berisi isi utama halaman, termasuk struktur kalkulator yang menggunakan elemen tabel
+            background-color: rgba(48, 8, 48, 0.918); //untuk menentukan warna latar belakang suatu elemen dengan menggunakan model warna RGBA Red, Green, Blue, Alpha
+            font-family: monospace; //untuk mengatur jenis font tipografi yang digunakan dalam sebuah elemen HTML sehingga menggunakan font monospace
+        }
+        table{ //Digunakan untuk mengatur tata letak tombol kalkulator
+            width: 320px; //menentukan lebar elemen
+            margin: 40px auto; //nilai properti
+            background-color: rgb(134, 73, 134); //untuk menentukan warna latar belakang suatu elemen
+            border-colour: rgb(235, 231, 231); //menentukan warna border
+        }
+        td{ //Setiap sel tabel menampung tombol kalkulator
+            width: 25%; //menentukan lebar elemen
+            border-color: rgb(245, 240, 243); //menentukan warna border
+        }
+        button{ //Elemen tombol yang dapat diklik, masing-masing memiliki atribut onclick yang memanggil fungsi tombol dari JavaScript
+            height: 70px; //menentukan tinggi dalam suatu elemen
+            font-size: 30px; //menentukan ukuran teks(font)
+            border: none; //menghilangkan border
+            text-align: center; //mengatur perataan teks di dalam elemen html
+            width: 100%; //menentukan lebar elemen
+        }
+        #inputLabel{ //Area tampilan atas untuk menampilkan angka atau hasil perhitungan, dengan warna latar belakang, ukuran font, dan posisi teks diatur
+            height: 100px; //menentukan tinggi dalam suatu elemen
+            font-size: 60px; //menentukan ukuran teks(font)
+            background-color: hsl(303, 31%, 47%); //untuk menentukan warna latar belakang suatu elemen
+            vertical-align: bottom; //mengatur perataan vertical
+            text-align: right; //mengatur perataan teks di dalam elemen html
+        }
+    </style> //Berisi aturan CSS untuk menentukan tampilan elemen dalam halaman
+</head> //metadata tentang dokumen, termasuk judul halaman, tautan ke stylesheet, dan elemen style atau script untuk menambahkan gaya dan logika
+<body> //Berisi isi utama halaman, termasuk struktur kalkulator yang menggunakan elemen tabel
+    <table border=""cellspacing="0"> //memberi garis di sekitar elemen tabel
+        <tr> //
+            <td colspan="4"id="inputLabel">0</td>
+        </tr>
+        <tr>
+            <td colspan="2"><button onclick="tombol(this)">AC</button></td>
+            <td><button onclick="tombol(this)">Del</button></td>
+            <td><button onclick="tombol(this)">/</button></td>
+        </tr>
+        <tr>
+            <td><button onclick="tombol(this)">7</button></td>
+            <td><button onclick="tombol(this)">8</button></td>
+            <td><button onclick="tombol(this)">9</button></td>
+            <td><button onclick="tombol(this)">*</button></td>
+        </tr>
+        <tr>
+            <td><button onclick="tombol(this)">4</button></td>
+            <td><button onclick="tombol(this)">5</button></td>
+            <td><button onclick="tombol(this)">6</button></td>
+            <td><button onclick="tombol(this)">-</button></td>
+        </tr>
+        <tr>
+            <td><button onclick="tombol(this)">1</button></td>
+            <td><button onclick="tombol(this)">2</button></td>
+            <td><button onclick="tombol(this)">3</button></td>
+            <td><button onclick="tombol(this)">+</button></td>
+        
+        </tr>
+        <tr>
+            <td colspan="2"><button onclick="tombol(this)">0</button></td>
+            <td><button onclick="tombol(this)">.</button></td>
+            <td><button onclick="tombol(this)">=</button></td> 
+        </tr>
+        </table>
+        <script>
+            var inputLabel = document.getElementById('inputLabel');
+
+            function tombol(obj){ //Mengambil teks dari tombol yang diklik (obj.innerHTML) dan memutuskan tindakan berdasarkan teks tersebut
+                var kondisi = obj.innerHTML;
+                if(kondisi=="="){ //evaluasi ekspresi matematika yang ada di layar menggunakan eval()
+                    inputLabel.innerHTML = eval(inputLabel.innerHTML);
+                }else if(kondisi=="AC"){ //reset tampilan menjadi "0"
+                    inputLabel.innerHTML="0";
+                }else if(kondisi=="Del"){ //hapus karakter terakhir pada tampilan
+                    inputLabel.innerHTML=inputLabel.innerHTML.slice(0,-1)||'0';
+                }else{
+                    if(inputLabel.innerHTML=="0"){
+                        inputLabel.innerHTML = kondisi;
+                    }else{
+                        inputLabel.innerHTML+= kondisi;
+                    }
+                }
+            }
+        </script>
+    </body>
+</html>
